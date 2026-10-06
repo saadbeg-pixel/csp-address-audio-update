@@ -112,12 +112,6 @@ td.hi, td .hi{font-family:var(--hi)}
 .flow .arr{color:var(--ink-3);font-family:var(--mono)}
 .branch{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:12px 0 0}
 
-/* questions */
-ol.q{padding-left:22px;margin:16px 0 0}
-ol.q li{margin-bottom:16px;color:var(--ink-2);font-size:15px;max-width:68ch}
-ol.q li b{color:var(--ink);display:block;font-family:var(--disp);font-size:16px;margin-bottom:2px}
-ol.q li .rec{display:block;margin-top:4px;font-size:14px}
-ol.q li .rec::before{content:"Suggested: ";font-family:var(--mono);font-size:11px;color:var(--free);letter-spacing:.06em;text-transform:uppercase}
 footer{padding:32px 0 56px;font-family:var(--mono);font-size:12px;color:var(--ink-3)}
 </style>
 </head>
@@ -129,8 +123,6 @@ footer{padding:32px 0 56px;font-family:var(--mono);font-size:12px;color:var(--in
     <h1>Address audio &amp; <span class="hi">पता नहीं समझ आया?</span></h1>
     <p class="lede" style="margin-top:16px">Three changes to the screen where a partner decides on a new booking: a new audio address player, one entry point for help with the address (in place of two), and tighter spacing so the card fits the new structure.</p>
     <div class="links">
-      <a href="https://www.figma.com/design/66xhM40letAo8L8kGTqVdx/PA-Sept-26?node-id=15388-12962" target="_blank" rel="noopener">Figma · new design <span>15388:12962</span></a>
-      <a href="https://www.figma.com/design/W2Z3B5xfFO3UibJSzkyHn2/PA---Dev--%3E-January-2026-Onwards?node-id=14763-6687" target="_blank" rel="noopener">Figma · current design <span>14763:6687</span></a>
       <a href="https://saadbeg-pixel.github.io/csp-booking-brief/" target="_blank" rel="noopener">Parent brief <span>New Connection Journey</span></a>
     </div>
     <p class="byline">Saad Beg · Design · 6 Oct 2026 · v1</p>
@@ -149,7 +141,7 @@ footer{padding:32px 0 56px;font-family:var(--mono);font-size:12px;color:var(--in
 
     <div class="shots">
       <figure><img src="img/old-screen.png" width="360" height="720" alt="Current booking decision screen: address card with small audio row, underlined 'पता नहीं समझे?' link, and a separate bordered row 'यहाँ आपके पहले से 3 कनेक्शन लगे हैं'."><figcaption><span class="tag old">Current</span><b>Live on master</b></figcaption></figure>
-      <figure><img src="img/new-screen.png" width="360" height="720" alt="New booking decision screen: ₹750 banner, landmark and address, chat-bubble audio player, and a single pink link 'पता नहीं समझ आया ?'."><figcaption><span class="tag new">New</span><b>Figma 15388:12803</b></figcaption></figure>
+      <figure><img src="img/new-screen.png" width="360" height="720" alt="New booking decision screen: ₹750 banner, landmark and address, chat-bubble audio player, and a single pink link 'पता नहीं समझ आया ?'."><figcaption><span class="tag new">New</span><b>New design</b></figcaption></figure>
     </div>
 
     <div class="callout" style="margin-top:20px">
@@ -165,7 +157,7 @@ footer{padding:32px 0 56px;font-family:var(--mono);font-size:12px;color:var(--in
     <p>The player now looks like a voice note from the customer. Before, it was a small play button, the <span class="hi">पता समझें</span> label and a 12-bar waveform pushed to the right. Now it is one tinted bubble that runs the full width of the card.</p>
 
     <div class="shots">
-      <figure><img src="img/audio-playing.png" width="296" height="48" alt="Audio bubble while playing: pause icon, waveform partly filled pink, 0:45, person avatar."><figcaption><span class="tag new">Playing</span><b>Figma 15511:4250</b></figcaption></figure>
+      <figure><img src="img/audio-playing.png" width="296" height="48" alt="Audio bubble while playing: pause icon, waveform partly filled pink, 0:45, person avatar."><figcaption><span class="tag new">Playing</span><b>Audio bubble</b></figcaption></figure>
     </div>
 
     <h3>Anatomy</h3>
@@ -186,7 +178,7 @@ footer{padding:32px 0 56px;font-family:var(--mono);font-size:12px;color:var(--in
       <li><b>Paused:</b> play icon, the pink fill stays where it stopped.</li>
       <li><b>Finished:</b> rewinds to Idle. This matches today's behaviour.</li>
       <li><b>No recording:</b> the bubble is <b>not shown at all</b>, as today. The link sits 16dp under the address.</li>
-      <li><b>Loading / failed to load:</b> not designed yet. See the open questions.</li>
+      <li><b>Loading / failed to load:</b> not designed yet.</li>
     </ul>
     <p>Tracking does not change: <code>address_audio_played</code> still fires on play.</p>
   </div>
@@ -213,7 +205,7 @@ footer{padding:32px 0 56px;font-family:var(--mono);font-size:12px;color:var(--in
 
     <h3>New sheet: <span class="hi">पता समझें</span></h3>
     <div class="shots">
-      <figure><img src="img/chooser-sheet.png" width="392" height="252" alt="Bottom sheet titled 'पता समझें' with two rows: call icon 'कस्टमर से पता कॉल पर समझें', router icon 'पहले से लगे अपने 3 कनेक्शन देखें', each with a pink chevron."><figcaption><span class="tag new">New</span><b>Figma 15469:3713</b></figcaption></figure>
+      <figure><img src="img/chooser-sheet.png" width="392" height="252" alt="Bottom sheet titled 'पता समझें' with two rows: call icon 'कस्टमर से पता कॉल पर समझें', router icon 'पहले से लगे अपने 3 कनेक्शन देखें', each with a pink chevron."><figcaption><span class="tag new">New</span><b>Address help sheet</b></figcaption></figure>
     </div>
     <ul class="plain">
       <li><b>Sheet:</b> bg <code>bg/default</code> · top radius 24 · drag handle 36×4 <code>stroke/subtle</code> (handle row 12 top, 8 bottom) · content 12 top, 24 bottom, 16 sides. There is no CTA. It closes on drag, scrim tap or system back.</li>
@@ -233,8 +225,8 @@ footer{padding:32px 0 56px;font-family:var(--mono);font-size:12px;color:var(--in
 
     <h3>The two sheets it opens</h3>
     <div class="shots">
-      <figure><img src="img/call-sheet.png" width="392" height="466" alt="Call sheet: phone icon, title 'कस्टमर से पता कॉल पर समझें', reassurance box with IVR code 7719, CTA 'कस्टमर से बात करें', tertiary 'वापस जाएँ'."><figcaption><span class="tag same">Existing</span><b>Call sheet · 15469:3445</b></figcaption></figure>
-      <figure><img src="img/nearby-sheet.png" width="408" height="669" alt="Nearby sheet titled 'पहले से लगे कनेक्शन' with a map of router pins and a list of three addresses with distances, CTA 'ठीक है'."><figcaption><span class="tag same">Existing</span><b>Nearby sheet · 15469:3517</b></figcaption></figure>
+      <figure><img src="img/call-sheet.png" width="392" height="466" alt="Call sheet: phone icon, title 'कस्टमर से पता कॉल पर समझें', reassurance box with IVR code 7719, CTA 'कस्टमर से बात करें', tertiary 'वापस जाएँ'."><figcaption><span class="tag same">Existing</span><b>Call sheet</b></figcaption></figure>
+      <figure><img src="img/nearby-sheet.png" width="408" height="669" alt="Nearby sheet titled 'पहले से लगे कनेक्शन' with a map of router pins and a list of three addresses with distances, CTA 'ठीक है'."><figcaption><span class="tag same">Existing</span><b>Nearby sheet</b></figcaption></figure>
     </div>
     <p>The layouts don't change. One copy difference: the Figma call-sheet CTA reads <span class="hi">कस्टमर से बात करें</span>, while the live string is <span class="hi">कस्टमर से बात करवाएँ</span>. See the copy table.</p>
   </div>
@@ -274,39 +266,15 @@ footer{padding:32px 0 56px;font-family:var(--mono);font-size:12px;color:var(--in
       <tr><td><code>booking.address_help.title</code></td><td class="hi">पता समझें</td><td>Understand the address</td><td>New</td></tr>
       <tr><td><code>booking.address_help.option_call</code></td><td class="hi">कस्टमर से पता कॉल पर समझें</td><td>Understand the address from the customer on call</td><td>New (same text as the call-sheet title)</td></tr>
       <tr><td><code>booking.address_help.option_nearby</code></td><td class="hi">पहले से लगे अपने {count} कनेक्शन देखें</td><td>See your {count} existing connections</td><td>New</td></tr>
-      <tr><td><code>booking.address_unclear.cta_connect</code></td><td class="hi"><span class="was">कस्टमर से बात करवाएँ</span><br>कस्टमर से बात करें</td><td>Talk to the customer</td><td>Changed (confirm, see Q5)</td></tr>
+      <tr><td><code>booking.address_unclear.cta_connect</code></td><td class="hi"><span class="was">कस्टमर से बात करवाएँ</span><br>कस्टमर से बात करें</td><td>Talk to the customer</td><td>Changed</td></tr>
       <tr><td><code>booking.fpn.nearby_connections</code></td><td class="hi">यहाँ आपके पहले से {count} कनेक्शन लगे हैं</td><td>—</td><td>No longer used on this card</td></tr>
-      <tr><td><code>drilldown.play_address_audio</code></td><td class="hi">पता समझें</td><td>—</td><td>Removed from the player (see Q1)</td></tr>
+      <tr><td><code>drilldown.play_address_audio</code></td><td class="hi">पता समझें</td><td>—</td><td>Removed from the player</td></tr>
     </table></div>
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <p class="eyebrow">Before build</p>
-    <h2>Open questions</h2>
-    <p>Figma doesn't settle these. Each has a suggested default so build doesn't stall, but please confirm.</p>
-    <ol class="q">
-      <li><b>Does the install drilldown get the new player too?</b>The player (<code>AddressVoiceNote</code>) is shared with the install drilldown, deliberately, so the two can't drift. The Figma only shows the booking card.<span class="rec">Restyle the shared component so both surfaces get it.</span></li>
-      <li><b>Where does "back" go from the call or nearby sheet?</b>From <span class="hi">वापस जाएँ</span> / <span class="hi">ठीक है</span> / system back, it could go to the <span class="hi">पता समझें</span> sheet or straight to the booking card.<span class="rec">Straight to the booking card. One level of sheets, and the link is one tap away.</span></li>
-      <li><b>When Row 2 is hidden, show a one-row sheet?</b>With no nearby connections, the chooser would hold only the call option.<span class="rec">Skip the chooser. The link opens the call sheet directly, as it does today.</span></li>
-      <li><b>Duration: total or countdown while playing?</b>The playing frame still shows <code>0:45</code>. Today the player counts down.<span class="rec">Count down while playing (elapsed shown as fill), and show the total when idle.</span></li>
-      <li><b><span class="hi">कस्टमर से बात करें</span> or <span class="hi">करवाएँ</span>?</b>The Figma CTA differs from the live string. It may be a deliberate change or drift in the file.</li>
-      <li><b>Tap target for play.</b>Only the 24dp icon, or the whole bubble?<span class="rec">The whole bubble toggles play/pause. 24dp is below the 48dp touch minimum.</span></li>
-      <li><b>Loading and error states for the audio.</b>The stream is prepared after the first tap, which can take a moment on a weak network. No state is designed for that or for a failed load.</li>
-      <li><b>New tracking?</b>Opening the <span class="hi">पता समझें</span> sheet and choosing a row are not tracked today. Should they be, to see which option partners use?</li>
-    </ol>
-
-    <h3>Inconsistencies spotted in the Figma</h3>
-    <ul class="plain">
-      <li>The two rows in the <span class="hi">पता समझें</span> sheet use different text styles. Row 1 is <code>type/body/lg</code> 16/24 and Row 2 is <code>L2_14_Regular</code> 14/20. One of them is probably unintended.</li>
-      <li>Row 1 has the same text as the call sheet's title, so the partner reads the same line twice in a row.</li>
-    </ul>
-  </div>
-</section>
-
 <footer>
-  <div class="wrap">Figma source: PA-Sept-26 · section “FPN Audio Msg” (15388:12962). Current-state values are read from <code>origin/master</code>, 6 Oct 2026.</div>
+  <div class="wrap">Current-state values are read from <code>origin/master</code>, 6 Oct 2026.</div>
 </footer>
 
 </body>

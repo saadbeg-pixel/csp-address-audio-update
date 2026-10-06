@@ -7,7 +7,5 @@ address player, the single "पता नहीं समझ आया ?" entry 
 `index.html` is a self-contained page, published at
 https://saadbeg-pixel.github.io/csp-address-audio-update/
 
-Figma: PA-Sept-26 → "FPN Audio Msg" (node 15388:12962).
-
 **Internal-facing.** Excluded from search engines (noindex + robots.txt), but anyone
 with the link can read it.
