@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Address Audio Update</title>
+<meta name="description" content="Spec for the booking decision screen update: redesigned audio address player, one 'पता नहीं समझ आया?' entry point with two options, and tightened spacing.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ink:#171226; --ink-2:#57506b; --ink-3:#867ea0;
+  --ground:#faf9fc; --panel:#ffffff; --rule:#e5e1ee; --rule-2:#efecf5;
+  --brand:#d9008d; --brand-soft:#fff0f9;
+  --free:#008043; --free-soft:#e6f7ee;
+  --cost:#a8341c; --cost-soft:#fdece7;
+  --wait:#7a5b00; --wait-soft:#fff3cf;
+  --shot-bg:#ebe7f2;
+  --disp:"Bricolage Grotesque","Noto Sans",system-ui,sans-serif;
+  --body:"Noto Sans","Noto Sans Devanagari",system-ui,sans-serif;
+  --hi:"Noto Sans Devanagari","Noto Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ink:#f0ecf7; --ink-2:#b4abc8; --ink-3:#8a81a3;
+  --ground:#141020; --panel:#1d1830; --rule:#332b47; --rule-2:#282139;
+  --brand:#ff5cc0; --brand-soft:#33132a;
+  --free:#4bd08c; --free-soft:#10301f;
+  --cost:#ff8f70; --cost-soft:#361b13;
+  --wait:#e8c766; --wait-soft:#332a10;
+  --shot-bg:#241e38;
+}}
+:root[data-theme="dark"]{
+  --ink:#f0ecf7; --ink-2:#b4abc8; --ink-3:#8a81a3;
+  --ground:#141020; --panel:#1d1830; --rule:#332b47; --rule-2:#282139;
+  --brand:#ff5cc0; --brand-soft:#33132a;
+  --free:#4bd08c; --free-soft:#10301f;
+  --cost:#ff8f70; --cost-soft:#361b13;
+  --wait:#e8c766; --wait-soft:#332a10;
+  --shot-bg:#241e38;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);
+  font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 16px}
+@media (min-width:640px){.wrap{padding:0 24px}}
+h1,h2,h3{font-family:var(--disp);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,5vw,48px);font-weight:700;letter-spacing:-.025em}
+h2{font-size:26px;font-weight:700;letter-spacing:-.015em;margin:0 0 8px}
+h3{font-size:17px;font-weight:700;margin:28px 0 8px}
+p{margin:0 0 16px;max-width:68ch}
+.hi{font-family:var(--hi)}
+.lede{font-size:19px;color:var(--ink-2);max-width:62ch}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 10px}
+header{padding:56px 0 32px;border-bottom:1px solid var(--rule)}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.links a{font-family:var(--mono);font-size:12px;text-decoration:none;color:var(--ink);
+  border:1px solid var(--rule);border-radius:8px;padding:9px 13px;background:var(--panel);
+  display:inline-flex;align-items:baseline;gap:7px}
+.links a:hover{border-color:var(--brand);color:var(--brand)}
+.links a span{color:var(--ink-3)}
+a:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.byline{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-top:18px}
+section{padding:40px 0;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+.callout{background:var(--panel);border:1px solid var(--rule);border-left:3px solid var(--brand);
+  border-radius:0 12px 12px 0;padding:14px 18px;margin:0 0 20px}
+.callout p:last-child{margin:0}
+ul.plain{margin:10px 0 18px;padding-left:20px}
+ul.plain li{font-size:15px;line-height:1.6;color:var(--ink-2);margin-bottom:8px;max-width:66ch}
+ul.plain li b{color:var(--ink);font-weight:600}
+code{font-family:var(--mono);font-size:.86em;background:var(--rule-2);padding:1px 5px;border-radius:4px;
+  overflow-wrap:anywhere}
+
+/* summary cards */
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:22px 0 0}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:16px 18px}
+.card .n{font-family:var(--mono);font-size:11px;color:var(--brand);letter-spacing:.1em;text-transform:uppercase}
+.card h3{margin:6px 0 6px;font-size:16px}
+.card p{font-size:14.5px;color:var(--ink-2);margin:0}
+
+/* screenshots */
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:22px 0 8px}
+figure{margin:0;background:var(--shot-bg);border-radius:16px;padding:16px;display:flex;flex-direction:column;align-items:center}
+figure img{display:block;max-width:100%;height:auto;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+figcaption{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);margin-top:12px;text-align:center;letter-spacing:.02em}
+figcaption b{color:var(--ink);font-weight:500}
+.tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 6px;border-radius:4px;margin-right:6px;vertical-align:1px}
+.tag.old{background:var(--rule-2);color:var(--ink-3)}
+.tag.new{background:var(--brand-soft);color:var(--brand)}
+.tag.same{background:var(--free-soft);color:var(--free)}
+
+/* tables */
+.tbl{overflow-x:auto;margin:16px 0 20px;border:1px solid var(--rule);border-radius:12px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--rule-2);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);background:var(--ground)}
+td.num{font-family:var(--mono);white-space:nowrap}
+td .was{color:var(--ink-3);text-decoration:line-through}
+td .now{color:var(--brand);font-weight:600}
+td.hi, td .hi{font-family:var(--hi)}
+
+/* flow */
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 6px;font-size:14px}
+.flow .step{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:8px 12px}
+.flow .step.b{border-color:var(--brand);color:var(--brand)}
+.flow .arr{color:var(--ink-3);font-family:var(--mono)}
+.branch{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:12px 0 0}
+
+/* questions */
+ol.q{padding-left:22px;margin:16px 0 0}
+ol.q li{margin-bottom:16px;color:var(--ink-2);font-size:15px;max-width:68ch}
+ol.q li b{color:var(--ink);display:block;font-family:var(--disp);font-size:16px;margin-bottom:2px}
+ol.q li .rec{display:block;margin-top:4px;font-size:14px}
+ol.q li .rec::before{content:"Suggested: ";font-family:var(--mono);font-size:11px;color:var(--free);letter-spacing:.06em;text-transform:uppercase}
+footer{padding:32px 0 56px;font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Partner App · Booking decision screen · Design update</p>
+    <h1>Address audio &amp; <span class="hi">पता नहीं समझ आया?</span></h1>
+    <p class="lede" style="margin-top:16px">Three changes to the screen where a partner decides on a new booking: a new audio address player, one entry point for help with the address (in place of two), and tighter spacing so the card fits the new structure.</p>
+    <div class="links">
+      <a href="https://www.figma.com/design/66xhM40letAo8L8kGTqVdx/PA-Sept-26?node-id=15388-12962" target="_blank" rel="noopener">Figma · new design <span>15388:12962</span></a>
+      <a href="https://www.figma.com/design/W2Z3B5xfFO3UibJSzkyHn2/PA---Dev--%3E-January-2026-Onwards?node-id=14763-6687" target="_blank" rel="noopener">Figma · current design <span>14763:6687</span></a>
+      <a href="https://saadbeg-pixel.github.io/csp-booking-brief/" target="_blank" rel="noopener">Parent brief <span>New Connection Journey</span></a>
+    </div>
+    <p class="byline">Saad Beg · Design · 6 Oct 2026 · v1</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">At a glance</p>
+    <h2>What changes</h2>
+    <div class="three">
+      <div class="card"><div class="n">01 · Audio</div><h3>New voice-note player</h3><p>A chat-bubble player: play/pause, a full-width waveform, the duration and a customer avatar. The <span class="hi">पता समझें</span> label goes.</p></div>
+      <div class="card"><div class="n">02 · Entry point</div><h3>One link, two options</h3><p>The <span class="hi">पता नहीं समझे?</span> link and the nearby-connections row become one link. It opens a sheet: call the customer, or see your nearby connections.</p></div>
+      <div class="card"><div class="n">03 · Spacing</div><h3>Tighter card</h3><p>Gaps inside the address card get smaller, and the nearby row leaves the card. The new values are marked in Figma and listed below.</p></div>
+    </div>
+
+    <div class="shots">
+      <figure><img src="img/old-screen.png" width="360" height="720" alt="Current booking decision screen: address card with small audio row, underlined 'पता नहीं समझे?' link, and a separate bordered row 'यहाँ आपके पहले से 3 कनेक्शन लगे हैं'."><figcaption><span class="tag old">Current</span><b>Live on master</b></figcaption></figure>
+      <figure><img src="img/new-screen.png" width="360" height="720" alt="New booking decision screen: ₹750 banner, landmark and address, chat-bubble audio player, and a single pink link 'पता नहीं समझ आया ?'."><figcaption><span class="tag new">New</span><b>Figma 15388:12803</b></figcaption></figure>
+    </div>
+
+    <div class="callout" style="margin-top:20px">
+      <p><b>Where this applies.</b> The card is one composable, <code>BookingFpnOverlay</code>. It is rendered in two places, and both get the change: the booking FPN (<code>MainActivity</code>) and the booking drilldown (<code>BookingFlowContent</code>). The call sheet and the nearby-connections sheet stay as they are. Only the way you reach them changes.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Change 01</p>
+    <h2>Audio address player</h2>
+    <p>The player now looks like a voice note from the customer. Before, it was a small play button, the <span class="hi">पता समझें</span> label and a 12-bar waveform pushed to the right. Now it is one tinted bubble that runs the full width of the card.</p>
+
+    <div class="shots">
+      <figure><img src="img/audio-playing.png" width="296" height="48" alt="Audio bubble while playing: pause icon, waveform partly filled pink, 0:45, person avatar."><figcaption><span class="tag new">Playing</span><b>Figma 15511:4250</b></figcaption></figure>
+    </div>
+
+    <h3>Anatomy</h3>
+    <div class="tbl"><table>
+      <tr><th>Part</th><th>Spec</th><th>Before</th></tr>
+      <tr><td>Container</td><td>Full card width × <b>48dp</b> tall · bg <code>bg/subtle #F1EDF7</code> · padding 12 H / 8 V · radius <b>16</b> on top-right, bottom-right and bottom-left, <b>0 on top-left</b> (bubble tail) · gap 8 between the parts</td><td>36dp row, no container</td></tr>
+      <tr><td>Play / pause</td><td><b>24dp</b> icon in brand <code>#D9008D</code>, with no circle behind it. Shows <code>play</code> when idle and <code>pause</code> while playing</td><td>36dp grey circle with a 14dp icon</td></tr>
+      <tr><td>Label</td><td><b>Removed</b></td><td><span class="hi">पता समझें</span></td></tr>
+      <tr><td>Waveform</td><td>Fills all the width left over, 4dp after the icon · 32dp tall · bars 2.5dp wide, 2dp apart, radius 2, heights 5 to 24dp · idle bars <code>bg/disabled #D7D3E0</code> · while playing, bars up to the playhead turn <code>bg/brand #D9008D</code></td><td>12 fixed bars, right-aligned</td></tr>
+      <tr><td>Duration</td><td><code>0:45</code> · <code>type/label/sm</code> 12/16 SemiBold · <code>text/subtle #665E75</code> · <b>always visible</b></td><td>Only while playing, as a <code>-m:ss</code> countdown</td></tr>
+      <tr><td>Avatar</td><td>32dp circle, bg <code>bg/default #FAF9FC</code>, 20dp <code>user_name</code> icon. Shows that this is the customer's voice. Display only</td><td>Did not exist</td></tr>
+    </table></div>
+
+    <h3>States</h3>
+    <ul class="plain">
+      <li><b>Idle:</b> play icon, all bars grey, total duration.</li>
+      <li><b>Playing:</b> pause icon, bars fill pink left to right with progress.</li>
+      <li><b>Paused:</b> play icon, the pink fill stays where it stopped.</li>
+      <li><b>Finished:</b> rewinds to Idle. This matches today's behaviour.</li>
+      <li><b>No recording:</b> the bubble is <b>not shown at all</b>, as today. The link sits 16dp under the address.</li>
+      <li><b>Loading / failed to load:</b> not designed yet. See the open questions.</li>
+    </ul>
+    <p>Tracking does not change: <code>address_audio_played</code> still fires on play.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Change 02</p>
+    <h2>One entry point: <span class="hi">पता नहीं समझ आया ?</span></h2>
+    <p>The card used to offer two separate ways to work out an address. The <span class="hi">पता नहीं समझे?</span> link opened the call sheet. A bordered row, <span class="hi">यहाँ आपके पहले से 3 कनेक्शन लगे हैं</span>, opened the nearby-connections sheet. Both solve the same problem, so they now sit behind one link. The <b>nearby row is removed from the card</b>.</p>
+
+    <div class="flow">
+      <span class="step hi">पता नहीं समझ आया ?</span><span class="arr">→</span>
+      <span class="step b">Sheet · <span class="hi">पता समझें</span></span><span class="arr">→</span>
+      <span class="step">Call sheet <em>or</em> Nearby sheet</span>
+    </div>
+
+    <h3>The link</h3>
+    <ul class="plain">
+      <li>Copy <span class="hi">पता नहीं समझ आया ?</span> (was <span class="hi">पता नहीं समझे ?</span>).</li>
+      <li><code>Label/L2_14_Regular</code> 14/20 · <b>brand <code>#D9008D</code></b> · <b>no underline</b> · left-aligned. Before, it was <code>bodyMd</code> in <code>textSecondary</code> with an underline.</li>
+      <li>Sits <b>16dp</b> below the address block and is the last item in the card.</li>
+    </ul>
+
+    <h3>New sheet: <span class="hi">पता समझें</span></h3>
+    <div class="shots">
+      <figure><img src="img/chooser-sheet.png" width="392" height="252" alt="Bottom sheet titled 'पता समझें' with two rows: call icon 'कस्टमर से पता कॉल पर समझें', router icon 'पहले से लगे अपने 3 कनेक्शन देखें', each with a pink chevron."><figcaption><span class="tag new">New</span><b>Figma 15469:3713</b></figcaption></figure>
+    </div>
+    <ul class="plain">
+      <li><b>Sheet:</b> bg <code>bg/default</code> · top radius 24 · drag handle 36×4 <code>stroke/subtle</code> (handle row 12 top, 8 bottom) · content 12 top, 24 bottom, 16 sides. There is no CTA. It closes on drag, scrim tap or system back.</li>
+      <li><b>Title:</b> <span class="hi">पता समझें</span> · <code>type/heading/lg</code> 24/32 Bold · 16dp to the list.</li>
+      <li><b>Rows:</b> DS <code>List Item</code>, Type=Default · min-height 48 · padding 16 · gap 12 · 24dp leading icon · 20dp chevron on the right in brand · 1dp divider between rows.</li>
+    </ul>
+    <div class="branch">
+      <div class="card"><div class="n">Row 1 · call</div><h3 class="hi">कस्टमर से पता कॉल पर समझें</h3><p>Opens the <b>existing</b> call sheet, <code>AddressUnclearSheet</code>, with the IVR call and the code chip. Same behaviour as today's link.</p></div>
+      <div class="card"><div class="n">Row 2 · nearby</div><h3 class="hi">पहले से लगे अपने {count} कनेक्शन देखें</h3><p>Opens the <b>existing</b> <code>NearbyConnectionsSheet</code> (map + list). Same behaviour as today's nearby row. <code>{count}</code> is the existing <code>nearbyConnectionsCount</code>.</p></div>
+    </div>
+
+    <h3>When a row can't be shown</h3>
+    <ul class="plain">
+      <li>Today the nearby sheet opens only when there are connections and the booking has map coordinates. Under the same conditions, <b>Row 2 is hidden</b> when the count is 0 or the booking has no lat/lng.</li>
+      <li>Row 1 is always available. If the booking has no IVR code, the call sheet hides the code chip, as it does today.</li>
+    </ul>
+
+    <h3>The two sheets it opens</h3>
+    <div class="shots">
+      <figure><img src="img/call-sheet.png" width="392" height="466" alt="Call sheet: phone icon, title 'कस्टमर से पता कॉल पर समझें', reassurance box with IVR code 7719, CTA 'कस्टमर से बात करें', tertiary 'वापस जाएँ'."><figcaption><span class="tag same">Existing</span><b>Call sheet · 15469:3445</b></figcaption></figure>
+      <figure><img src="img/nearby-sheet.png" width="408" height="669" alt="Nearby sheet titled 'पहले से लगे कनेक्शन' with a map of router pins and a list of three addresses with distances, CTA 'ठीक है'."><figcaption><span class="tag same">Existing</span><b>Nearby sheet · 15469:3517</b></figcaption></figure>
+    </div>
+    <p>The layouts don't change. One copy difference: the Figma call-sheet CTA reads <span class="hi">कस्टमर से बात करें</span>, while the live string is <span class="hi">कस्टमर से बात करवाएँ</span>. See the copy table.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Change 03</p>
+    <h2>Spacing</h2>
+    <p>The card padding is unchanged at 16dp. The gaps inside the card are smaller. Values are from the Figma auto-layout. Token names are the <code>WiomSpacing</code> equivalents.</p>
+    <div class="tbl"><table>
+      <tr><th>Gap</th><th>Current</th><th>New</th></tr>
+      <tr><td>₹750 banner → <span class="hi">पास में</span></td><td class="num">16 · lg</td><td class="num">16 · lg <span style="color:var(--ink-3)">(same)</span></td></tr>
+      <tr><td><span class="hi">पास में</span> → landmark name</td><td class="num"><span class="was">4 · xs</span></td><td class="num"><span class="now">0</span></td></tr>
+      <tr><td>Landmark row → address</td><td class="num"><span class="was">16 · lg</span></td><td class="num"><span class="now">8 · sm</span></td></tr>
+      <tr><td>Address → audio bubble</td><td class="num"><span class="was">12 · md</span></td><td class="num"><span class="now">8 · sm</span></td></tr>
+      <tr><td>Audio bubble (or address, if there is no audio) → link</td><td class="num"><span class="was">8 · sm</span></td><td class="num"><span class="now">16 · lg</span></td></tr>
+      <tr><td>Link → nearby row</td><td class="num"><span class="was">16 · lg</span></td><td class="num"><span class="now">Row removed</span></td></tr>
+      <tr><td>Landmark block → directions icon (horizontal)</td><td class="num">space-between</td><td class="num">12 · md, icon vertically centred on the 2-line block</td></tr>
+      <tr><td>Bottom CTA bar padding</td><td class="num"><span class="was">16 all sides</span></td><td class="num"><span class="now">16 top · 24 bottom · 16 sides</span></td></tr>
+      <tr><td>Bottom CTA bar top edge</td><td class="num"><span class="was">none</span></td><td class="num"><span class="now">1dp <code>stroke/default #E8E4F0</code></span></td></tr>
+      <tr><td><span class="hi">नहीं लगा सकता</span> (tertiary) vertical padding</td><td class="num"><span class="was">8 · sm (40dp tall)</span></td><td class="num"><span class="now">4 · xs (32dp tall)</span></td></tr>
+      <tr><td>Primary → tertiary CTA</td><td class="num">8 · sm</td><td class="num">8 · sm <span style="color:var(--ink-3)">(same)</span></td></tr>
+    </table></div>
+    <p>Figma shows the address and its locality as one paragraph. Render them with no extra gap between the lines. Today there is a 4dp gap.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Strings</p>
+    <h2>Copy</h2>
+    <p>Keys live in <code>booking_labels_hi_en.json</code>. The key names for the new sheet are suggestions.</p>
+    <div class="tbl"><table>
+      <tr><th>Key</th><th>Hindi</th><th>English</th><th>Status</th></tr>
+      <tr><td><code>booking.address_unclear</code></td><td class="hi"><span class="was">पता नहीं समझे ?</span><br>पता नहीं समझ आया ?</td><td>Didn't understand the address?</td><td>Changed</td></tr>
+      <tr><td><code>booking.address_help.title</code></td><td class="hi">पता समझें</td><td>Understand the address</td><td>New</td></tr>
+      <tr><td><code>booking.address_help.option_call</code></td><td class="hi">कस्टमर से पता कॉल पर समझें</td><td>Understand the address from the customer on call</td><td>New (same text as the call-sheet title)</td></tr>
+      <tr><td><code>booking.address_help.option_nearby</code></td><td class="hi">पहले से लगे अपने {count} कनेक्शन देखें</td><td>See your {count} existing connections</td><td>New</td></tr>
+      <tr><td><code>booking.address_unclear.cta_connect</code></td><td class="hi"><span class="was">कस्टमर से बात करवाएँ</span><br>कस्टमर से बात करें</td><td>Talk to the customer</td><td>Changed (confirm, see Q5)</td></tr>
+      <tr><td><code>booking.fpn.nearby_connections</code></td><td class="hi">यहाँ आपके पहले से {count} कनेक्शन लगे हैं</td><td>—</td><td>No longer used on this card</td></tr>
+      <tr><td><code>drilldown.play_address_audio</code></td><td class="hi">पता समझें</td><td>—</td><td>Removed from the player (see Q1)</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Before build</p>
+    <h2>Open questions</h2>
+    <p>Figma doesn't settle these. Each has a suggested default so build doesn't stall, but please confirm.</p>
+    <ol class="q">
+      <li><b>Does the install drilldown get the new player too?</b>The player (<code>AddressVoiceNote</code>) is shared with the install drilldown, deliberately, so the two can't drift. The Figma only shows the booking card.<span class="rec">Restyle the shared component so both surfaces get it.</span></li>
+      <li><b>Where does "back" go from the call or nearby sheet?</b>From <span class="hi">वापस जाएँ</span> / <span class="hi">ठीक है</span> / system back, it could go to the <span class="hi">पता समझें</span> sheet or straight to the booking card.<span class="rec">Straight to the booking card. One level of sheets, and the link is one tap away.</span></li>
+      <li><b>When Row 2 is hidden, show a one-row sheet?</b>With no nearby connections, the chooser would hold only the call option.<span class="rec">Skip the chooser. The link opens the call sheet directly, as it does today.</span></li>
+      <li><b>Duration: total or countdown while playing?</b>The playing frame still shows <code>0:45</code>. Today the player counts down.<span class="rec">Count down while playing (elapsed shown as fill), and show the total when idle.</span></li>
+      <li><b><span class="hi">कस्टमर से बात करें</span> or <span class="hi">करवाएँ</span>?</b>The Figma CTA differs from the live string. It may be a deliberate change or drift in the file.</li>
+      <li><b>Tap target for play.</b>Only the 24dp icon, or the whole bubble?<span class="rec">The whole bubble toggles play/pause. 24dp is below the 48dp touch minimum.</span></li>
+      <li><b>Loading and error states for the audio.</b>The stream is prepared after the first tap, which can take a moment on a weak network. No state is designed for that or for a failed load.</li>
+      <li><b>New tracking?</b>Opening the <span class="hi">पता समझें</span> sheet and choosing a row are not tracked today. Should they be, to see which option partners use?</li>
+    </ol>
+
+    <h3>Inconsistencies spotted in the Figma</h3>
+    <ul class="plain">
+      <li>The two rows in the <span class="hi">पता समझें</span> sheet use different text styles. Row 1 is <code>type/body/lg</code> 16/24 and Row 2 is <code>L2_14_Regular</code> 14/20. One of them is probably unintended.</li>
+      <li>Row 1 has the same text as the call sheet's title, so the partner reads the same line twice in a row.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Figma source: PA-Sept-26 · section “FPN Audio Msg” (15388:12962). Current-state values are read from <code>origin/master</code>, 6 Oct 2026.</div>
+</footer>
+
+</body>
+</html>
